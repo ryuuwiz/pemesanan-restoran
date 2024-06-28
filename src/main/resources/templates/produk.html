@@ -43,11 +43,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td><a href="#" class="btn btn-danger">Hapus</a></td>
+        <tr th:each="produk,i : ${allProduk}">
+          <th scope="row" th:text="${i.index + 1}"></th>
+          <td th:text="${produk.nama_produk}"></td>
+          <td th:text="${'Rp. ' + #numbers.formatDecimal(produk.harga, 0, 'COMMA', 0, 'POINT')}">Otto</td>
+          <td><a th:href="@{/produk/hapus/{id}(id=${produk.id})}" class="btn btn-danger">Hapus</a></td>
         </tr>
       </tbody>
     </table>
