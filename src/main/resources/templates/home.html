@@ -1,7 +1,14 @@
-<div th:insert="layout.html"></div>
-<div class="container mt-5 text-center">
-  <img th:src="@{/img/undraw_diet_ghvw.svg}" alt="undraw" width="500px">
-  <h1>Aplikasi Manajemen Pemesanan</h1>
-  <p>Aplikasi Manajemen Pemesanan (APM) adalah aplikasi untuk manajemen pemesanan pada restoran anda.</p>
-  <p>Aplikasi ini digunakan untuk manajemen oleh kasir dan owner restoran.</p>
+<div th:insert="layout.html" />
+
+<div class="container mt-5 mb-5 text-center">
+  <img data-aos="fade-down" data-aos-duration="1000" th:src="@{/img/undraw_diet_ghvw.svg}" alt="undraw" width="450px">
+  <h1 data-aos="fade-down" data-aos-duration="2000">Aplikasi Manajemen Pemesanan</h1>
+  <p data-aos="fade-down" data-aos-duration="3000">Aplikasi Manajemen Pemesanan (APM) adalah aplikasi untuk manajemen
+    pemesanan pada restoran
+    anda.
+  </p>
+  <p data-aos="fade-down" data-aos-duration="4000">Aplikasi ini digunakan untuk manajemen oleh kasir dan owner restoran.
+  </p>
 </div>
+
+<footer th:replace="fragments/footer.html::footer" />

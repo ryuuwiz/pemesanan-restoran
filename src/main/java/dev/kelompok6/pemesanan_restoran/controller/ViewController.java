@@ -5,11 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("")
+@RequestMapping
 public class ViewController {
 
   @GetMapping
   public String index() {
     return "home";
   }
+
+  @GetMapping("pesanan")
+  public String pesanan() {
+    return "pesanan";
+  }
+
+  @GetMapping("produk")
+  public String produk() {
+    return "produk";
+  }
+
 }
