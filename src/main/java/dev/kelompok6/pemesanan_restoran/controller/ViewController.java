@@ -37,4 +37,15 @@ public class ViewController {
     return "produk";
   }
 
+  @GetMapping("laporan")
+  public String laporan(Model model) {
+    int total = 0;
+    for (int i = 0; i < pesananService.allPesanan().size(); i++) {
+      total += pesananService.allPesanan().get(i).getSubtotal();
+    }
+    model.addAttribute("allPesanan", pesananService.allPesanan());
+    model.addAttribute("total", total);
+    return "laporan";
+  }
+
 }
