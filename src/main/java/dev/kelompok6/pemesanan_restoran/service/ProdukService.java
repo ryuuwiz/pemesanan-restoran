@@ -1,6 +1,7 @@
 package dev.kelompok6.pemesanan_restoran.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import dev.kelompok6.pemesanan_restoran.dto.Mapper;
 import dev.kelompok6.pemesanan_restoran.dto.ProdukDto;
+import dev.kelompok6.pemesanan_restoran.model.Produk;
 import dev.kelompok6.pemesanan_restoran.repository.ProdukRepo;
 
 @Service
@@ -22,6 +24,11 @@ public class ProdukService {
 
   public List<ProdukDto> allProduk() {
     return produkRepo.findAll().stream().map(Mapper::mapProdukDto).collect(Collectors.toList());
+  }
+
+  public ProdukDto findOne(Integer id) {
+    Optional<Produk> produk = produkRepo.findById(id);
+    return Mapper.mapProdukDto(produk.get());
   }
 
   public void deleteProduk(Integer id) {

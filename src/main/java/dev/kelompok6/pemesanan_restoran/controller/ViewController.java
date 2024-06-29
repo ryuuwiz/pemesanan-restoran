@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import dev.kelompok6.pemesanan_restoran.service.PesananService;
 import dev.kelompok6.pemesanan_restoran.service.ProdukService;
 
 @Controller
@@ -15,13 +16,18 @@ public class ViewController {
   @Autowired
   ProdukService produkService;
 
+  @Autowired
+  PesananService pesananService;
+
   @GetMapping
   public String index() {
     return "home";
   }
 
   @GetMapping("pesanan")
-  public String pesanan() {
+  public String pesanan(Model model) {
+    model.addAttribute("allProduk", produkService.allProduk());
+    model.addAttribute("allPesanan", pesananService.allPesanan());
     return "pesanan";
   }
 

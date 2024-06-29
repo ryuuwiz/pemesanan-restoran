@@ -7,5 +7,4 @@ import dev.kelompok6.pemesanan_restoran.model.Pesanan;
 
 @Repository
 public interface PesananRepo extends JpaRepository<Pesanan, Integer> {
-
 }

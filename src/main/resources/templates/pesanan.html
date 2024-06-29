@@ -1,9 +1,54 @@
 <div th:insert="layout.html" />
 
-<div class="container my-5 text-center">
-  <h1 class="text-start">Pesanan</h1>
+<div class="container my-5">
+  <h1 class="text-start" data-aos="fade-down" data-aos-duration="1000">Pesanan</h1>
 
-  <div class="table-responsive">
+  <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#tambahPesanan"
+    data-bs-whatever="@mdo" data-aos="fade-down" data-aos-duration="1000">Tambah Pesanan</button>
+
+  <div class="modal fade" id="tambahPesanan" tabindex="-1" aria-labelledby="tambahPesananLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tambahPesananLabel">Tambah Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/pesanan/simpan}" th:object="${formPesanan}" method="post">
+            <div class="mb-3">
+              <label for="nama_pelanggan" class="col-form-label">Nama Pelanggan:</label>
+              <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan">
+            </div>
+            <div class="mb-3">
+              <label for="no_meja" class="col-form-label">Nomor Meja: </label>
+              <input type="number" class="form-control" id="no_meja" name="no_meja">
+            </div>
+            <div class="mb-3">
+              <label for="produk" class="col-form-label">Pilih Makanan / Minuman: </label>
+              <select class="form-select" id="produk" name="id_produk">
+                <option th:each="produk : ${allProduk}" th:value="${produk.id}"
+                  th:text="${produk.nama_produk} + ' - ' + ${'Rp. ' + #numbers.formatDecimal(produk.harga, 0, 'COMMA', 0, 'POINT')}">
+                </option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="tgl_pesan" class="col-form-label">Tanggal Pesan: </label>
+              <input type="date" class="form-control" id="tgl_pesan" name="tgl_pesan" />
+            </div>
+            <div class="mb-3">
+              <label for="jumlah" class="col-form-label">Jumlah: </label>
+              <input type="number" class="form-control" id="jumlah" name="jumlah">
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive" data-aos="fade-down" data-aos-duration="1000">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -19,16 +64,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td><a href="#" class="btn btn-danger">Hapus</a></td>
+        <tr th:each="pesanan, i : ${allPesanan}">
+          <th scope="row" th:text="${i.index + 1}"></th>
+          <td th:text="${pesanan.nama_pelanggan}"></td>
+          <td th:text="${pesanan.no_meja}"></td>
+          <td th:text="${pesanan.produk.nama_produk}"></td>
+          <td th:text="${'Rp. ' + #numbers.formatDecimal(pesanan.produk.harga, 0, 'COMMA', 0, 'POINT')}"></td>
+          <td th:text="${pesanan.tgl_pesan}"></td>
+          <td th:text="${pesanan.jumlah}"></td>
+          <td th:text="${'Rp. ' + #numbers.formatDecimal(pesanan.subtotal, 0, 'COMMA', 0, 'POINT')}"></td>
+          <td><a th:href="@{/pesanan/hapus/{id}(id=${pesanan.id_pesanan})}" class="btn btn-danger">Hapus</a></td>
         </tr>
       </tbody>
     </table>
